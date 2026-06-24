@@ -24,3 +24,5 @@ INSERT INTO users (employee_id, username, password, name, department, email, rol
 ('EMP001', 'admin', 'admin123', 'Admin User', 'HR', 'admin@mcarbon.com', 'admin'),
 ('EMP002', 'employee1', 'emp123', 'Rahul Sharma', 'IT', 'rahul@mcarbon.com', 'employee'),
 ('EMP003', 'employee2', 'emp123', 'Priya Singh', 'Finance', 'priya@mcarbon.com', 'employee');
+
+
