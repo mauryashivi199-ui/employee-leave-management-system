@@ -38,11 +38,44 @@ def login():
 def employee_dashboard():
     if 'user' not in session:
         return redirect(url_for('login'))
+
     db = get_db()
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM leaves WHERE employee_id=%s", (session['user']['id'],))
+
+    cursor.execute(
+        "SELECT * FROM leaves WHERE employee_id=%s",
+        (session['user']['id'],)
+    )
     leaves = cursor.fetchall()
-    return render_template('employee_dashboard.html', leaves=leaves, user=session['user'])
+
+    cursor.execute(
+        "SELECT COUNT(*) AS used_leaves FROM leaves WHERE employee_id=%s AND status='approved'",
+        (session['user']['id'],)
+    )
+    used = cursor.fetchone()['used_leaves']
+
+    cursor.execute(
+        "SELECT COUNT(*) AS pending_leaves FROM leaves WHERE employee_id=%s AND status='pending'",
+        (session['user']['id'],)
+    )
+    pending = cursor.fetchone()['pending_leaves']
+
+    cursor.execute(
+        "SELECT * FROM users WHERE id=%s",
+        (session['user']['id'],)
+    )
+    user = cursor.fetchone()
+
+    available = user['total_leaves'] - used
+
+    return render_template(
+        'employee_dashboard.html',
+        leaves=leaves,
+        user=user,
+        used=used,
+        pending=pending,
+        available=available
+    )
 
 @app.route('/apply', methods=['GET', 'POST'])
 def apply_leave():
