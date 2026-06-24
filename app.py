@@ -109,6 +109,28 @@ def update_leave(leave_id, action):
     cursor.execute("UPDATE leaves SET status=%s WHERE id=%s", (action, leave_id))
     db.commit()
     return redirect(url_for('admin_dashboard'))
+    @app.route('/cancel_leave/<int:leave_id>')
+def cancel_leave(leave_id):
+
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM leaves
+        WHERE id=%s
+        AND employee_id=%s
+        AND status='pending'
+        """,
+        (leave_id, session['user']['id'])
+    )
+
+    db.commit()
+
+    return redirect(url_for('employee_dashboard'))
 
 @app.route('/logout')
 def logout():
