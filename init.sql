@@ -9,9 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     department VARCHAR(100) NOT NULL,
     email VARCHAR(100),
-    designation VARCHAR(100),
-    joining_date DATE,
-    total_leaves INT DEFAULT 24,
+    total_leaves INT DEFAULT 20,
     role ENUM('admin', 'employee') NOT NULL
 );
 
@@ -27,13 +25,7 @@ CREATE TABLE IF NOT EXISTS leaves (
     FOREIGN KEY (employee_id) REFERENCES users(id)
 );
 
-INSERT INTO users 
-(employee_id, username, password, name, department, email, designation, joining_date, role)
-VALUES
-('EMP001', 'admin', 'admin123', 'Admin User', 'HR', 'admin@company.com', 'HR Manager', '2024-01-01', 'admin');
-
-INSERT INTO users 
-(employee_id, username, password, name, department, email, designation, joining_date, role)
-VALUES
-('EMP002', 'employee', 'employee123', 'Test Employee', 'IT', 'emp@company.com', 'Developer', '2024-01-01', 'employee');
-
+INSERT INTO users (employee_id, username, password, name, department, email, total_leaves, role) VALUES
+('EMP001', 'admin', 'admin123', 'Admin User', 'HR', 'admin@mcarbon.com', 20, 'admin'),
+('EMP002', 'employee1', 'emp123', 'Rahul Sharma', 'IT', 'rahul@mcarbon.com', 20, 'employee'),
+('EMP003', 'employee2', 'emp123', 'Priya Singh', 'Finance', 'priya@mcarbon.com', 20, 'employee');
