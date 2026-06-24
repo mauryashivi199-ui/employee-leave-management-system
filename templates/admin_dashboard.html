@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; }
+        .navbar { background: #cc0000; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar h1 { font-size: 20px; }
+        .navbar a { color: white; text-decoration: none; background: #0066cc; padding: 8px 15px; border-radius: 5px; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .welcome { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        table { width: 100%; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-collapse: collapse; }
+        th { background: #cc0000; color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        .pending { color: orange; font-weight: bold; }
+        .approved { color: green; font-weight: bold; }
+        .rejected { color: red; font-weight: bold; }
+        .btn-approve { background: green; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
+        .btn-reject { background: red; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>🏢 mCarbon Admin Panel</h1>
+        <div>Welcome, {{ user.username }} | <a href="/logout">Logout</a></div>
+    </div>
+    <div class="container">
+        <div class="welcome">
+            <h2>Admin Dashboard</h2>
+            <p>Manage all employee leave requests.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Employee</th>
+                <th>Leave Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for leave in leaves %}
+            <tr>
+                <td>{{ leave.username }}</td>
+                <td>{{ leave.leave_type }}</td>
+                <td>{{ leave.start_date }}</td>
+                <td>{{ leave.end_date }}</td>
+                <td>{{ leave.reason }}</td>
+                <td class="{{ leave.status }}">{{ leave.status.upper() }}</td>
+                <td>
+                    {% if leave.status == 'pending' %}
+                    <a href="/update_leave/{{ leave.id }}/approved" class="btn-approve">✓ Approve</a>
+                    <a href="/update_leave/{{ leave.id }}/rejected" class="btn-reject">✗ Reject</a>
+                    {% else %}
+                    —
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" style="text-align:center; padding:20px;">No leave requests found!</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
