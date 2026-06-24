@@ -7,6 +7,7 @@ services:
       MYSQL_DATABASE: leavedb
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -20,7 +21,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      - FLASK_ENV=development
-      volumes:
+
+volumes:
   mysql_data:
