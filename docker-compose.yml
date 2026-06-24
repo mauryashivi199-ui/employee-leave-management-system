@@ -22,3 +22,5 @@ services:
         condition: service_healthy
     environment:
       - FLASK_ENV=development
+      volumes:
+  mysql_data:
