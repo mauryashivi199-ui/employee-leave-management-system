@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply Leave</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; }
+        .navbar { background: #0066cc; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar h1 { font-size: 20px; }
+        .navbar a { color: white; text-decoration: none; background: #cc0000; padding: 8px 15px; border-radius: 5px; }
+        .container { max-width: 600px; margin: 30px auto; padding: 0 20px; }
+        .form-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h2 { margin-bottom: 20px; color: #333; }
+        label { display: block; margin: 12px 0 5px; color: #555; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+        textarea { height: 100px; resize: vertical; }
+        button { width: 100%; padding: 12px; background: #0066cc; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        button:hover { background: #0052a3; }
+        .back { display: inline-block; margin-bottom: 15px; color: #0066cc; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>🏢 mCarbon Leave Portal</h1>
+        <div>Welcome, {{ user.username }} | <a href="/logout">Logout</a></div>
+    </div>
+    <div class="container">
+        <a href="/employee" class="back">← Back to Dashboard</a>
+        <div class="form-box">
+            <h2>Apply for Leave</h2>
+            <form method="POST">
+                <label>Leave Type</label>
+                <select name="leave_type" required>
+                    <option value="">Select Leave Type</option>
+                    <option value="Sick Leave">Sick Leave</option>
+                    <option value="Casual Leave">Casual Leave</option>
+                    <option value="Annual Leave">Annual Leave</option>
+                    <option value="Maternity Leave">Maternity Leave</option>
+                    <option value="Emergency Leave">Emergency Leave</option>
+                </select>
+                <label>Start Date</label>
+                <input type="date" name="start_date" required>
+                <label>End Date</label>
+                <input type="date" name="end_date" required>
+                <label>Reason</label>
+                <textarea name="reason" placeholder="Enter reason for leave..." required></textarea>
+                <button type="submit">Submit Leave Request</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
