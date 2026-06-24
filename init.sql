@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS leaves (
     FOREIGN KEY (employee_id) REFERENCES users(id)
 );
 
-INSERT INTO users (username, password, role) VALUES
-('admin', 'admin123', 'admin'),
-('employee1', 'emp123', 'employee'),
-('employee2', 'emp123', 'employee');
+INSERT INTO users (employee_id, username, password, name, department, email, role) VALUES
+('EMP001', 'admin', 'admin123', 'Admin User', 'HR', 'admin@mcarbon.com', 'admin'),
+('EMP002', 'employee1', 'emp123', 'Rahul Sharma', 'IT', 'rahul@mcarbon.com', 'employee'),
+('EMP003', 'employee2', 'emp123', 'Priya Singh', 'Finance', 'priya@mcarbon.com', 'employee');
