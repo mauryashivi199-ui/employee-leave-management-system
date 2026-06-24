@@ -27,5 +27,13 @@ CREATE TABLE IF NOT EXISTS leaves (
     FOREIGN KEY (employee_id) REFERENCES users(id)
 );
 
+INSERT INTO users 
+(employee_id, username, password, name, department, email, designation, joining_date, role)
+VALUES
+('EMP001', 'admin', 'admin123', 'Admin User', 'HR', 'admin@company.com', 'HR Manager', '2024-01-01', 'admin');
 
+INSERT INTO users 
+(employee_id, username, password, name, department, email, designation, joining_date, role)
+VALUES
+('EMP002', 'employee', 'employee123', 'Test Employee', 'IT', 'emp@company.com', 'Developer', '2024-01-01', 'employee');
 
